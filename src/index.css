@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - Educational Excellence with Modern Approachability: Diseño que transmite profesionalismo académico pero con calidez y accesibilidad para familias españolas.
+   - Bento Grid Surfaces: Estructura modular que permite destacar diferentes niveles de cursos, precios y promociones de verano de forma clara y organizada.
+   - Trust-Building Physicality: Uso sutil de rim-light y sombras suaves para dar profundidad a las tarjetas de cursos, creando sensación de calidad premium sin perder cercanía.
+   - Razón: Una academia de inglés en Carabanchel necesita competir visualmente con grandes cadenas, pero manteniendo el toque personal y familiar. El diseño debe facilitar la comparación de precios y niveles (infantil hasta C1) de forma instantánea.
+
+2. TYPOGRAPHY:
+   - Plus Jakarta Sans (UI principal): Fuente geométrica moderna con excelente legibilidad en español, transmite profesionalismo educativo sin rigidez. Sus pesos variables (400-800) permiten jerarquías claras para precios, niveles y CTAs.
+   - Outfit (Headings/Display): Complementa Jakarta Sans con personalidad más distintiva para títulos de secciones ("Cursos de Verano", "Nuestra Metodología"). Su geometría redondeada aporta amabilidad.
+   - JetBrains Mono: Para destacar precios numéricos (65€, 100€/semana) y códigos de niveles (A1, B2, C1) con claridad técnica.
+
+3. COLOR SYSTEM:
+   - Brand Primary (Hue 210): Azul royal educativo inspirado en el #004290 original, pero optimizado en OKLCH para mejor contraste digital. Representa confianza, conocimiento y la bandera UK del logo.
+   - Mapping: --brand → --primary (botones CTA, enlaces), --accent (destacados de verano), --ring (focus states accesibles).
+   - Sky Blue Accent (Hue 200): Derivado del #87CEEB original, usado para fondos de hero y secciones alternadas, transmite apertura y optimismo.
+   - Success Green (Hue 150): Para badges de descuentos ("10% descuento amigos") y confirmaciones de formulario.
+   - Warning Orange (Hue 35): Para destacar ofertas limitadas de verano ("¡Plazas limitadas!").
+   - Destructive Red (Hue 10): Mínimo uso, solo para errores de formulario.
+   - Semantic Logic: Los precios usan --primary-foreground sobre --card para máxima legibilidad. Las promociones de verano usan --accent con suficiente contraste para llamar la atención sin saturar.
+
+4. USAGE GUIDE:
+   - Layout: Full-width hero con imagen de estudiantes felices + overlay gradient, seguido de container centrado (max-w-7xl) para secciones de contenido. Bento grid para tabla de precios (3-4 columnas en desktop, stack en mobile).
+   - Efectos recomendados: backdrop-blur-md en cards de cursos sobre fondos sutiles, border-l-4 con --accent en cards de verano para diferenciación visual, subtle box-shadow con --ring/10 para elevación.
+   - Pricing Tables: Usar --muted backgrounds para filas alternas, --primary para headers de columna, --accent-foreground para precios destacados.
+   - CTAs: Botón primario ("Reserva tu plaza") con --primary + hover:scale-105, secundario ("Más información") con --secondary.
+   - Accessibility: Todos los textos sobre fondos coloreados cumplen WCAG AA. Los precios numéricos usan font-variant-numeric: tabular-nums para alineación perfecta.
+   - Regla específica: Las secciones de "Cursos de Verano" deben usar --accent como color dominante para diferenciarse del contenido anual, con badges de "Nuevo" o "Oferta" en --warning.
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.99 0.002 210);
+  --foreground: oklch(0.15 0.01 220);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.01 220);
+  --primary: oklch(0.38 0.15 230);
+  --primary-foreground: oklch(0.98 0.005 230);
+  --secondary: oklch(0.92 0.015 220);
+  --secondary-foreground: oklch(0.22 0.02 220);
+  --muted: oklch(0.96 0.008 220);
+  --muted-foreground: oklch(0.48 0.015 220);
+  --accent: oklch(0.75 0.08 200);
+  --accent-foreground: oklch(0.15 0.02 210);
+  --destructive: oklch(0.55 0.22 15);
+  --destructive-foreground: oklch(0.98 0.005 15);
+  --border: oklch(0.88 0.01 220);
+  --input: oklch(0.88 0.01 220);
+  --ring: oklch(0.45 0.15 230);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.55 0.18 230);
+  --chart-2: oklch(0.65 0.15 200);
+  --chart-3: oklch(0.60 0.20 150);
+  --chart-4: oklch(0.62 0.18 35);
+  --chart-5: oklch(0.58 0.16 280);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.98 0.005 220);
+  --sidebar-foreground: oklch(0.25 0.015 220);
+  --sidebar-primary: oklch(0.40 0.15 230);
+  --sidebar-primary-foreground: oklch(0.98 0.005 230);
+  --sidebar-accent: oklch(0.92 0.015 220);
+  --sidebar-accent-foreground: oklch(0.22 0.02 220);
+  --sidebar-border: oklch(0.90 0.01 220);
+  --sidebar-ring: oklch(0.45 0.15 230);
+}
+
+.dark {
+  --background: oklch(0.12 0.015 230);
+  --foreground: oklch(0.95 0.008 220);
+  --card: oklch(0.16 0.018 230);
+  --card-foreground: oklch(0.95 0.008 220);
+  --popover: oklch(0.14 0.016 230);
+  --popover-foreground: oklch(0.95 0.008 220);
+  --primary: oklch(0.65 0.18 220);
+  --primary-foreground: oklch(0.12 0.015 230);
+  --secondary: oklch(0.22 0.025 220);
+  --secondary-foreground: oklch(0.92 0.01 220);
+  --muted: oklch(0.20 0.02 220);
+  --muted-foreground: oklch(0.62 0.015 220);
+  --accent: oklch(0.55 0.12 195);
+  --accent-foreground: oklch(0.98 0.005 200);
+  --destructive: oklch(0.60 0.24 18);
+  --destructive-foreground: oklch(0.98 0.005 18);
+  --border: oklch(0.25 0.02 220);
+  --input: oklch(0.25 0.02 220);
+  --ring: oklch(0.70 0.18 220);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.65 0.20 230);
+  --chart-2: oklch(0.70 0.18 200);
+  --chart-3: oklch(0.68 0.22 150);
+  --chart-4: oklch(0.70 0.20 38);
+  --chart-5: oklch(0.66 0.18 280);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.14 0.016 230);
+  --sidebar-foreground: oklch(0.88 0.01 220);
+  --sidebar-primary: oklch(0.65 0.18 220);
+  --sidebar-primary-foreground: oklch(0.12 0.015 230);
+  --sidebar-accent: oklch(0.22 0.025 220);
+  --sidebar-accent-foreground: oklch(0.92 0.01 220);
+  --sidebar-border: oklch(0.22 0.02 220);
+  --sidebar-ring: oklch(0.70 0.18 220);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}
