@@ -6,9 +6,20 @@ export default function Contacto() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ nombre: "", email: "", telefono: "", mensaje: "", nivel: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  await fetch("https://formspree.io/f/mgoqywvn", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nombre:   form.nombre,
+      email:    form.email,
+      telefono: form.telefono,
+      nivel:    form.nivel,
+      mensaje:  form.mensaje,
+    }),
+  });
+  setSent(true);
   };
 
   return (
