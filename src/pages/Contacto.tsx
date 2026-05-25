@@ -1,25 +1,28 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ROUTES } from "@/lib/index";
 
 export default function Contacto() {
   const [sent, setSent] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [form, setForm] = useState({ nombre: "", email: "", telefono: "", mensaje: "", nivel: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  await fetch("https://formspree.io/f/mgoqywvn", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      nombre:   form.nombre,
-      email:    form.email,
-      telefono: form.telefono,
-      nivel:    form.nivel,
-      mensaje:  form.mensaje,
-    }),
-  });
-  setSent(true);
+    e.preventDefault();
+    await fetch("https://formspree.io/f/mgoqywvn", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre:   form.nombre,
+        email:    form.email,
+        telefono: form.telefono,
+        nivel:    form.nivel,
+        mensaje:  form.mensaje,
+      }),
+    });
+    setSent(true);
   };
 
   return (
@@ -134,7 +137,22 @@ export default function Contacto() {
                   <label className="text-sm font-medium text-foreground mb-1 block">Mensaje</label>
                   <textarea className="w-full border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" rows={4} value={form.mensaje} onChange={e => setForm({...form, mensaje: e.target.value})} placeholder="Cuéntanos qué necesitas..." />
                 </div>
-                <button type="submit" className="w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                <div className="flex items-start gap-3 p-3 bg-muted/30 rounded-xl border border-border">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    required
+                    checked={consent}
+                    onChange={e => setConsent(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 accent-primary shrink-0 cursor-pointer"
+                  />
+                  <label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                    He leído y acepto la{" "}
+                    <Link to={ROUTES.PRIVACIDAD} className="text-primary underline hover:no-underline font-medium">Política de Privacidad</Link>
+                    {" "}y consiento el tratamiento de mis datos personales para gestionar mi consulta. Responsable: Level Up Academy (NIF 50649796R).
+                  </label>
+                </div>
+                <button type="submit" disabled={!consent} className="w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
                   <Send size={16} /> Enviar mensaje
                 </button>
               </form>

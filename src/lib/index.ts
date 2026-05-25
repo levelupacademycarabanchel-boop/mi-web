@@ -6,4 +6,7 @@ export const ROUTES = {
   VERANO: "/verano",
   CONTACTO: "/contacto",
   TEST_NIVEL: "/test-nivel",
+  AVISO_LEGAL: "/aviso-legal",
+  PRIVACIDAD: "/privacidad",
+  COOKIES: "/cookies",
 } as const;

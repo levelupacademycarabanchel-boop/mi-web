@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { ROUTES } from "@/lib/index";
 import { Header, Footer, WhatsAppButton, MobileCallBar } from "@/components/Layout";
 import FloatingBanner from "@/components/FloatingBanner";
+import CookieBanner from "@/components/CookieBanner";
 import Home from "@/pages/Home";
 import Metodologia from "@/pages/Metodologia";
 import Nosotros from "@/pages/Nosotros";
@@ -9,6 +10,9 @@ import Cursos from "@/pages/Cursos";
 import Verano from "@/pages/Verano";
 import Contacto from "@/pages/Contacto";
 import TestNivel from "@/pages/TestNivel";
+import AvisoLegal from "@/pages/AvisoLegal";
+import Privacidad from "@/pages/Privacidad";
+import Cookies from "@/pages/Cookies";
 
 export default function App() {
   return (
@@ -24,12 +28,16 @@ export default function App() {
             <Route path={ROUTES.VERANO} element={<Verano />} />
             <Route path={ROUTES.CONTACTO} element={<Contacto />} />
             <Route path={ROUTES.TEST_NIVEL} element={<TestNivel />} />
+            <Route path={ROUTES.AVISO_LEGAL} element={<AvisoLegal />} />
+            <Route path={ROUTES.PRIVACIDAD} element={<Privacidad />} />
+            <Route path={ROUTES.COOKIES} element={<Cookies />} />
           </Routes>
         </div>
         <Footer />
         <WhatsAppButton />
         <MobileCallBar />
         <FloatingBanner />
+        <CookieBanner />
       </div>
     </HashRouter>
   );

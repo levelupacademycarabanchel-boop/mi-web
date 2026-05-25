@@ -168,8 +168,15 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-background/10 text-center text-xs text-background/40 py-4">
-        © 2026 Level Up Academy · Todos los derechos reservados
+      <div className="border-t border-background/10 py-5">
+        <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-background/40">
+          <span>© 2026 Level Up Academy · NIF 50649796R · Todos los derechos reservados</span>
+          <div className="flex items-center gap-4">
+            <Link to={ROUTES.AVISO_LEGAL} className="hover:text-background/70 transition-colors">Aviso Legal</Link>
+            <Link to={ROUTES.PRIVACIDAD} className="hover:text-background/70 transition-colors">Privacidad</Link>
+            <Link to={ROUTES.COOKIES} className="hover:text-background/70 transition-colors">Cookies</Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
