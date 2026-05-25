@@ -24,6 +24,8 @@ export default function Contacto() {
   },
   "EleNw51LFz21-7ee2"
 );
+      setSent(true);
+};
 
   return (
     <main className="py-16">
