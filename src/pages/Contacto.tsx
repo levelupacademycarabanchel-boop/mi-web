@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -11,19 +12,18 @@ export default function Contacto() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetch("https://formspree.io/f/mgoqywvn", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nombre:   form.nombre,
-        email:    form.email,
-        telefono: form.telefono,
-        nivel:    form.nivel,
-        mensaje:  form.mensaje,
-      }),
-    });
-    setSent(true);
-  };
+    await emailjs.send(
+  "service_de48uno",
+  "template_mycaxwp",
+  {
+    nombre: form.nombre,
+    email: form.email,
+    telefono: form.telefono,
+    nivel: form.nivel,
+    mensaje: form.mensaje,
+  },
+  "EleNw51LFz21-7ee2"
+);
 
   return (
     <main className="py-16">
