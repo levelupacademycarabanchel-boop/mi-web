@@ -13,19 +13,19 @@ export default function Contacto() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await emailjs.send(
-  "service_de48uno",
-  "template_mycaxwp",
-  {
-    nombre: form.nombre,
-    email: form.email,
-    telefono: form.telefono,
-    nivel: form.nivel,
-    mensaje: form.mensaje,
-  },
-  "EleNw51LFz21-7ee2"
-);
-      setSent(true);
-};
+      "service_de48uno",
+      "template_mycaxwp",
+      {
+        nombre:   form.nombre,
+        email:    form.email,
+        telefono: form.telefono,
+        nivel:    form.nivel,
+        mensaje:  form.mensaje,
+      },
+      "EleNw51LFz21-7ee2"
+    );
+    setSent(true);
+  };
 
   return (
     <main className="py-16">
